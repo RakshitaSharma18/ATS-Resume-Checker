@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATS Resume Checker</title>
+</head>
+
+<body>
+
+    <h1>ATS Resume Checker</h1>
+
+    <form action="/upload"
+          method="POST"
+          enctype="multipart/form-data">
+
+        <input type="file"
+               name="resume"
+               accept=".pdf"
+               required>
+
+        <button type="submit">
+            Analyze Resume
+        </button>
+
+    </form>
+
+    {% if result %}
+
+    <hr>
+
+    <h2>
+        ATS Score : {{ result.score }}
+    </h2>
+
+    <h3>Skills Found</h3>
+
+    <ul>
+        {% for skill in result.skills_found %}
+            <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Skills Missing</h3>
+
+    <ul>
+        {% for skill in result.skills_missing %}
+            <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <h3>
+        LinkedIn :
+        {% if result.linkedin_found %}
+            Found
+        {% else %}
+            Not Found
+        {% endif %}
+    </h3>
+
+    <h3>
+        GitHub :
+        {% if result.github_found %}
+            Found
+        {% else %}
+            Not Found
+        {% endif %}
+    </h3>
+
+    <h3>
+        Education :
+        {% if result.education_found %}
+            Found
+        {% else %}
+            Not Found
+        {% endif %}
+    </h3>
+
+    <h3>
+        Projects :
+        {% if result.project_found %}
+            Found
+        {% else %}
+            Not Found
+        {% endif %}
+    </h3>
+
+    {% endif %}
+
+</body>
+</html>
